@@ -1,0 +1,9 @@
+org\example\filter\CorsFilter.class
+org\example\dao\IContactDao.class
+org\example\resources\HelloWorldResource.class
+org\example\domain\Contact$ContactBuilder.class
+org\example\dao\ContactDaoDb.class
+org\example\domain\Contact.class
+org\example\App.class
+org\example\dao\ContactDao.class
+org\example\resources\ContactsResource.class
