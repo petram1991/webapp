@@ -1,28 +1,60 @@
 package org.example.resources;
 
-import org.example.dao.IContactDao;
+import org.example.dao.ContactDaoDb;
 import org.example.domain.Contact;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.util.Collection;
+import javax.ws.rs.core.Response;
+
 
 @Produces(MediaType.APPLICATION_JSON)
 @Path("/contacts")
 public class ContactsResource {
 
     @Inject
-    private IContactDao dao;
+    private ContactDaoDb dao;
 
     @GET
-    public Collection<Contact> getAll(@QueryParam("q") String q) {
-        return q == null ? dao.getAll() : dao.get(q);
+    public Response getAll() {
+        return Response.ok(dao.getAll()).build();
     }
 
     @POST
-    public  Contact post(Contact c){
-    dao.add(c);
-        return c;
+    public Response create(Contact c) {
+        dao.create(c);
+        return Response.ok().build();
+    }
+
+    @GET
+    @Path("{id}")
+    public Response getContact(@PathParam("id") Long id) {
+        Contact c = dao.findById(id);
+
+        return Response.ok(c).build();
+    }
+
+    @PUT
+    @Path("{id}")
+    public Response update(@PathParam("id") Long id, Contact c) {
+        Contact updateTodo = dao.findById(id);
+
+        updateTodo.setFirstName(c.getFirstName());
+        updateTodo.setSurname(c.getSurname());
+        updateTodo.setEmail(c.getEmail());
+        dao.update(updateTodo);
+
+        return Response.ok().build();
+    }
+
+    @DELETE
+    @Path("{id}")
+    public Response delete(@PathParam("id") Long id) {
+        Contact getContact = dao.findById(id);
+
+        dao.delete(getContact);
+
+        return Response.ok().build();
     }
 }
