@@ -3,6 +3,7 @@ package org.example.resources;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.example.dao.UserDao;
+import org.example.domain.Contact;
 import org.example.domain.User;
 
 import org.example.util.KeyGenerator;
@@ -62,6 +63,14 @@ public class AuthResource {
         } catch (Exception e) {
             return Response.status(UNAUTHORIZED).build();
         }
+    }
+
+    @GET
+    @Path("{id}")
+    public Response getUser(@PathParam("id") Long id) {
+        User user = dao.findById(id);
+
+        return Response.ok(user).build();
     }
 
     private String issueToken(String login) {
