@@ -38,12 +38,12 @@ public class ContactsResource {
     @PUT
     @Path("{id}")
     public Response update(@PathParam("id") Long id, Contact c) {
-        Contact updateTodo = dao.findById(id);
+        Contact updateContact = dao.findById(id);
 
-        updateTodo.setFirstName(c.getFirstName());
-        updateTodo.setSurname(c.getSurname());
-        updateTodo.setEmail(c.getEmail());
-        dao.update(updateTodo);
+        updateContact.setFirstName(c.getFirstName());
+        updateContact.setSurname(c.getSurname());
+        updateContact.setEmail(c.getEmail());
+        dao.update(updateContact);
 
         return Response.ok().build();
     }
