@@ -16,7 +16,7 @@ import javax.persistence.*;
 
 public class Contact {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String firstName;
     private String surname;

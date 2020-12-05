@@ -22,7 +22,7 @@ public class User {
     public static final String FIND_BY_USERNAME_PASSWORD = "User.findByUsernameAndPassword";
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String username;
     private String email;
